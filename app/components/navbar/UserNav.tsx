@@ -8,7 +8,7 @@ import useSignupModal from "@/app/hooks/useSignUpModal"
 
 
 const UserNav = () => {
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
     const loginModal = useLoginModal();
     const signupModal = useSignupModal();
     

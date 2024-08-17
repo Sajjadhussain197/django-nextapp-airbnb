@@ -15,4 +15,4 @@ const useLoginModal = create<LoginModalStore>((set)=>({
 
 }))
 
-export default useLoginModal;
+export default useLoginModal;  
