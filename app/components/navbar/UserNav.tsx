@@ -1,17 +1,22 @@
 "use client"
 
-import { useState } from "react"
+import React, { useState } from "react"
 import MenuLinks from "./MenuLinks"
 import useLoginModal from "@/app/hooks/useLoginModal"
 import useSignupModal from "@/app/hooks/useSignUpModal"
+import LogoutButton from "../LogoutButton"
 
+interface UserNavProps{
+    userId?: string | null;
+}
 
-
-const UserNav = () => {
+const UserNav: React.FC<UserNavProps> = (
+   { userId}
+) => {
     const [isOpen, setIsOpen] = useState(false)
     const loginModal = useLoginModal();
     const signupModal = useSignupModal();
-    
+    console.log('asc', userId)
     return (
         <div>
             <div className="p-2 relative inline-block border rounded-full">
@@ -31,13 +36,23 @@ const UserNav = () => {
                 </button>
                 {isOpen && (
                     <div className="w-[220px] absolute top-[50px] right-0 bg-white border rounded-xl shadow-md">
-                      <MenuLinks label="login" onClick={()=>{console.log("clicked")
-                        loginModal.open();
-                      }} />
-                      <MenuLinks label="Signup" onClick={()=>{console.log("clicked")
-                        signupModal.open();
-                      }} />
-                       
+                      {userId ?
+                        (<LogoutButton />):
+                        ( 
+                            <>
+
+                            <MenuLinks label="login" onClick={()=>{console.log("clicked")
+                                loginModal.open();
+                            }} />
+                              <MenuLinks label="Signup" onClick={()=>{console.log("clicked")
+                                signupModal.open();
+                            }} />            
+                            </>
+                        )
+
+                       }
+                      
+                     
                     </div>
                 )
                 
