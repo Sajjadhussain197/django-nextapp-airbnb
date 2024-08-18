@@ -21,6 +21,7 @@ const addPropertyModal = useAddPropertyModal();
       addPropertyModal.open();
     }
     else{
+      console.log(userId)
       loginModal.open();
     }
   }

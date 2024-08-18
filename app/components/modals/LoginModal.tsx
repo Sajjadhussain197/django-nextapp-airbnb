@@ -37,9 +37,6 @@ const LoginModal = () => {
     }
     const content = (
         <>
-        {/* <h2 className="mb-6 text-2xl">
-            welcom djangoairbnb , please login
-        </h2> */}
 
         <form action={submitLogin} className='space-y-4'>
             <input onChange={(e)=>setEmail(e.target.value)} placeholder='your email address ' type="email"  className='w-full px-4 h-[54px] border border-gray=100 rounded-xl'/>
