@@ -24,7 +24,7 @@ const SignUpModal = () => {
         }
 
         try {
-            const response = await apiService.post('/api/auth/register/', formData);
+            const response = await apiService.postWithoutToken('/api/auth/register/', formData);
             console.log('Response from /api/auth/register:', response);
 
             if (response.access) {
@@ -69,7 +69,7 @@ const SignUpModal = () => {
                         {error}
                     </div>
                 ))}
-                <CustomButton onClick={submitSignup} label="Submit" />
+                <CustomButton label="Submit" onClick={submitSignup}  />
             </form>
         </>
     )

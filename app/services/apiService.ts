@@ -4,16 +4,18 @@
 import { error } from "console"
 import { headers } from "next/headers"
 import { resolve } from "path"
-
+import { getAccessToken } from "../lib/actions"
 const apiService = {
 get: async function (url: string): Promise<any> {
     console.log(process.env.NEXT_PUBLIC_API_HOST,url)
+    const token = await getAccessToken();
     return new Promise((resolve,reject)=>{
         fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`,{
             method: 'GET',
             headers: {
                 'accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization':`Bearer ${token}`
             }
         })
         .then(response => response.json())
@@ -27,7 +29,31 @@ get: async function (url: string): Promise<any> {
     })
     
 },
-post: async function (url: string, data: any): Promise<any> {
+post: async function(url: string, data: FormData): Promise<any> {
+    console.log('post', url, data);
+
+    const token = await getAccessToken();
+
+    return new Promise((resolve, reject) => {
+        fetch(`${process.env.NEXT_PUBLIC_API_HOST}${url}`, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'Authorization':`Bearer ${token}`
+            }
+        })
+            .then(response => response.json())
+            .then((json) => {
+                console.log('Response:', json);
+
+                resolve(json);
+            })
+            .catch((error => {
+                reject(error);
+            }))
+    })
+},
+postWithoutToken: async function (url: string, data: any): Promise<any> {
     const fullUrl = `${process.env.NEXT_PUBLIC_API_HOST}${url}`;
     console.log(`Full request URL: ${fullUrl}`);
 
@@ -35,9 +61,9 @@ post: async function (url: string, data: any): Promise<any> {
         fetch(fullUrl, {
             method: 'POST',
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
             body: JSON.stringify(data)
         })
         .then(async response => {

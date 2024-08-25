@@ -19,27 +19,27 @@ const Categories: React.FC<CategoryProps> = ({
             width={24}
             alt="icon"
             src={'/assets/asset 6.webp'} />
-            <span className="text-xs">Icon</span>
+            <span className="text-xs">Beach</span>
         </div>
         <div 
-         onClick={()=>setCategory('vials') }
+         onClick={()=>setCategory('Villas') }
         className="pb-4 flex flex-col items-center opacity-70 space-y-2 mx-3 border-b-2 border-white hover:border-gray-200 hover:opacity-100">
             <Image
             height={24}
             width={24}
             alt="icon"
             src={'/assets/asset 6.webp'} />
-            <span className="text-xs">Amazing views</span>
+            <span className="text-xs">Villas</span>
         </div>
         <div 
-         onClick={()=>setCategory('tiny homes') }
+         onClick={()=>setCategory('Tiny Homes') }
         className="pb-4 flex flex-col items-center opacity-70 space-y-2 mx-3 border-b-2 border-white hover:border-gray-200 hover:opacity-100">
             <Image
             height={24}
             width={24}
             alt="icon"
             src={'/assets/asset 6.webp'} />
-            <span className="text-xs">Rooms</span>
+            <span className="text-xs">Tiny Homes</span>
         </div>
     </div>
     </>

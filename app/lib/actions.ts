@@ -1,3 +1,4 @@
+import { Accessor } from './../../node_modules/@babel/types/lib/index-legacy.d';
 "use server"
 
 import { cookies } from "next/headers"
@@ -49,4 +50,10 @@ export async function getUserId(){
     const userId = cookies().get('session_userid')?.value;
     return userId ? userId : null
     console.log('bla bla ', userId)
+}
+
+export async function getAccessToken(){
+    let accessToken = cookies().get('session_access_token')?.value;
+    return accessToken;
+
 }
