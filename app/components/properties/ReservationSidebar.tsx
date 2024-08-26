@@ -1,9 +1,18 @@
 import React from 'react'
 
-const ReservationSidebar = () => {
+export type Porperty= {
+    id :string;
+    price_per_night:number;
+}
+interface ReservationSidebarProps{
+    property: Porperty;
+}
+const ReservationSidebar: React.FC<ReservationSidebarProps> = ({
+    property
+}) => {
   return (
     <aside className='mt-6 p-6 col-span-2 rounded-xl border border-gray-300 shadow-xl'>
-        <h2 className="mb-5 text-2xl">$200 per night</h2>
+        <h2 className="mb-5 text-2xl">${property.price_per_night} per night</h2>
         <div className="mb-6 p-3 border border-gray-400 rounded-xl">
             <label htmlFor="" className='block font-bold text-xs'>Guests</label>
             <select name="" id="" className='w-full -ml-1 text-xm'>

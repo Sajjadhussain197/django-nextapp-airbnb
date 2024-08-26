@@ -1,8 +1,13 @@
 import ReservationSidebar from '@/app/components/properties/ReservationSidebar'
 import Image from 'next/image'
 import React from 'react'
+import apiService from '@/app/services/apiService'
 
-const PropertyDetailPage = () => {
+const PropertyDetailPage = async (
+    {params}:{params:{id:string}}
+) => {
+
+    const property = await apiService.get(`/api/properties/${params.id}/`)
   return (
     
     <main className="max-w-[1500px] mx-auto px-6 pb-6">
@@ -16,20 +21,24 @@ const PropertyDetailPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mt-4 ">
             <div className="col-span-3 py-6 pr-6 ">
                 <h1 className="mb-4 text-4xl">
-                    Property Name
+                    {property.title}
                 </h1>
                 <span className='mb-6 block text-lg text-gray-600 '>
-                    4-guest - 2 bedroom - 1 bathroom
+                {property.guests}guest - {property.bedrooms} bedroom - {property.bathrooms} bathroom
                 </span>
                 <hr />
                 <div className="flex py-6 items-center space-4">
+                   {property.landlord.avatar_url  &&
+                   (
                     <Image
-                    src='/assets/asset 71.webp'
+                    src={property.landlord.avatar}
                     alt='profile pic'
                     width={50}
                     height={50}
                     className='rounded-full'/>
-                    <p><strong>Jonh Doe</strong> is your host</p>
+                   )}
+                    <p><strong>{property.landlord.name}
+                        </strong> is your host</p>
                 </div>
                 <hr />
                 <div className="mt-6 text-lg">
@@ -37,7 +46,8 @@ const PropertyDetailPage = () => {
                 </div>
             </div>
             
-            <ReservationSidebar />
+            <ReservationSidebar
+            property={property} />
         </div>
     </main>
   )
